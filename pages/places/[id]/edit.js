@@ -20,7 +20,6 @@ export default function EditPage() {
     });
 
     if (response.ok) {
-      alert("Changes commited!");
       mutate();
     }
     if (!response.ok) {
@@ -36,7 +35,7 @@ export default function EditPage() {
       <Link href={`/places/${id}`} passHref legacyBehavior>
         <StyledLink $justifySelf="start">back</StyledLink>
       </Link>
-      <Form onSubmit={editPlace} formName={"edit-place"} defaultData={place} />
+      <Form $edit onSubmit={editPlace} formName={"edit-place"} defaultData={place} />
     </>
   );
 }

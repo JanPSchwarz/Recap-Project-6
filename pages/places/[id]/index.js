@@ -37,8 +37,19 @@ export default function DetailsPage() {
 
   if (!isReady || isLoading || error) return <h2>Loading...</h2>;
 
-  function deletePlace() {
-    console.log("deleted?");
+  async function deletePlace(id) {
+    const response = await fetch(`/api/places/${id}`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      alert(
+        "Sight was deleted! Afer clicking OK you will be redirected to the homepage."
+      );
+      router.push("/");
+    }
+    if (!response.ok) {
+      console.log(`Error: ${response.status}`);
+    }
   }
 
   return (
@@ -68,7 +79,10 @@ export default function DetailsPage() {
         <Link href={`/places/${id}/edit`} passHref legacyBehavior>
           <StyledLink>Edit</StyledLink>
         </Link>
-        <StyledButton onClick={deletePlace} type="button" $variant="delete">
+        <StyledButton
+          onClick={() => deletePlace(id)}
+          type="button"
+          $variant="delete">
           Delete
         </StyledButton>
       </ButtonContainer>
