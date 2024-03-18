@@ -1,17 +1,24 @@
 import { places } from "../../../../lib/db.js";
+import Sight from "@/db/models/Sights";
+import dbConnect from "@/db/connect.js";
 
-export default function handler(request, response) {
+export default async function handler(request, response) {
   const { id } = request.query;
 
-  if (!id) {
-    return;
+  if (request.method === `GET`) {
+    const sights = await Sight.findById(id);
+    return response.status(200).json(sights);
   }
 
-  const place = places.find((place) => place.id === id);
+  // if (!id) {
+  //   return;
+  // }
 
-  if (!place) {
-    return response.status(404).json({ status: "Not found" });
-  }
+  // const place = places.find((place) => place.id === id);
 
-  response.status(200).json(place);
+  // if (!place) {
+  //   return response.status(404).json({ status: "Not found" });
+  // }
+
+  // response.status(200).json(place);
 }
