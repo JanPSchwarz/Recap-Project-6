@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { StyledButton } from "./StyledButton.js";
+import { useRouter } from "next/router.js";
 
 const FormContainer = styled.form`
   display: grid;
@@ -25,14 +26,16 @@ const Label = styled.label`
 `;
 
 export default function Form({ onSubmit, formName, defaultData, $edit }) {
+  const router = useRouter();
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
     onSubmit(data);
-    {
-      $edit && event.target.name.focus();
+
+    if ($edit) {
       alert("updated");
+      router.push("/");
     }
   }
 

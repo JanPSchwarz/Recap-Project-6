@@ -37,7 +37,7 @@ export default function DetailsPage() {
 
   if (!isReady || isLoading || error) return <h2>Loading...</h2>;
 
-  async function deletePlace(id) {
+  async function deletePlace() {
     const response = await fetch(`/api/places/${id}`, {
       method: "DELETE",
     });
@@ -80,7 +80,7 @@ export default function DetailsPage() {
           <StyledLink>Edit</StyledLink>
         </Link>
         <StyledButton
-          onClick={() => deletePlace(id)}
+          onClick={() => deletePlace()}
           type="button"
           $variant="delete">
           Delete
