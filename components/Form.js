@@ -30,6 +30,8 @@ export default function Form({ onSubmit, formName, defaultData }) {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
     onSubmit(data);
+    event.target.reset();
+    event.target.name.focus();
   }
 
   return (
@@ -68,8 +70,7 @@ export default function Form({ onSubmit, formName, defaultData }) {
         id="description"
         cols="30"
         rows="10"
-        defaultValue={defaultData?.description}
-      ></Textarea>
+        defaultValue={defaultData?.description}></Textarea>
       <StyledButton type="submit">
         {defaultData ? "Update place" : "Add place"}
       </StyledButton>
