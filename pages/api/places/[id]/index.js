@@ -6,7 +6,18 @@ export default async function handler(request, response) {
 
   if (request.method === `GET`) {
     const sight = await Sight.findById(id);
+
+    if (!sight) {
+      return response.status(404).json({ status: "Not Found" });
+    }
     return response.status(200).json(sight);
+  }
+
+  if (request.method === `PATCH`) {
+    const updateSight = request.body;
+    await Sight.findByIdAndUpdate(id, updateSight);
+
+    response.status(200).json({ status: "Sight successfully updated" });
   }
 
   // if (!id) {
